@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>FormationEntity.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">TW3</a> &gt; <a href="index.source.html" class="el_package">com.projet.tw3.model</a> &gt; <span class="el_source">FormationEntity.java</span></div><h1>FormationEntity.java</h1><pre class="source lang-java linenums">/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package com.projet.tw3.model;
+
+/**
+ *
+ * @author floriandenise
+ */
+public class FormationEntity {
+   private int id_formation;
+  private String intitule_form;
+  private String sigle_form;
+  private String type_form;
+  private int fk_id_specialite_form;
+  private int fk_id_etablissement_form;
+
+<span class="nc" id="L20">    public FormationEntity(String intitule_form, String sigle_form, String type_form, int fk_id_specialite_form, int fk_id_etablissement_form) {</span>
+<span class="nc" id="L21">        this.intitule_form = intitule_form;</span>
+<span class="nc" id="L22">        this.sigle_form = sigle_form;</span>
+<span class="nc" id="L23">        this.type_form = type_form;</span>
+<span class="nc" id="L24">        this.fk_id_specialite_form = fk_id_specialite_form;</span>
+<span class="nc" id="L25">        this.fk_id_etablissement_form = fk_id_etablissement_form;</span>
+<span class="nc" id="L26">    }</span>
+
+<span class="nc" id="L28">    public FormationEntity(int id_formation, String intitule_form, String sigle_form, String type_form, int fk_id_specialite_form, int fk_id_etablissement_form) {</span>
+<span class="nc" id="L29">        this.id_formation = id_formation;</span>
+<span class="nc" id="L30">        this.intitule_form = intitule_form;</span>
+<span class="nc" id="L31">        this.sigle_form = sigle_form;</span>
+<span class="nc" id="L32">        this.type_form = type_form;</span>
+<span class="nc" id="L33">        this.fk_id_specialite_form = fk_id_specialite_form;</span>
+<span class="nc" id="L34">        this.fk_id_etablissement_form = fk_id_etablissement_form;</span>
+<span class="nc" id="L35">    }</span>
+
+    public void setId_formation(int id_formation) {
+<span class="nc" id="L38">        this.id_formation = id_formation;</span>
+<span class="nc" id="L39">    }</span>
+
+    public void setIntitule_form(String intitule_form) {
+<span class="nc" id="L42">        this.intitule_form = intitule_form;</span>
+<span class="nc" id="L43">    }</span>
+
+    public void setSigle_form(String sigle_form) {
+<span class="nc" id="L46">        this.sigle_form = sigle_form;</span>
+<span class="nc" id="L47">    }</span>
+
+    public void setType_form(String type_form) {
+<span class="nc" id="L50">        this.type_form = type_form;</span>
+<span class="nc" id="L51">    }</span>
+
+    public void setFk_id_specialite_form(int fk_id_specialite_form) {
+<span class="nc" id="L54">        this.fk_id_specialite_form = fk_id_specialite_form;</span>
+<span class="nc" id="L55">    }</span>
+
+    public void setFk_id_etablissement_form(int fk_id_etablissement_form) {
+<span class="nc" id="L58">        this.fk_id_etablissement_form = fk_id_etablissement_form;</span>
+<span class="nc" id="L59">    }</span>
+
+    public int getId_formation() {
+<span class="nc" id="L62">        return id_formation;</span>
+    }
+
+    public String getIntitule_form() {
+<span class="nc" id="L66">        return intitule_form;</span>
+    }
+
+    public String getSigle_form() {
+<span class="nc" id="L70">        return sigle_form;</span>
+    }
+
+    public String getType_form() {
+<span class="nc" id="L74">        return type_form;</span>
+    }
+
+    public int getFk_id_specialite_form() {
+<span class="nc" id="L78">        return fk_id_specialite_form;</span>
+    }
+
+    public int getFk_id_etablissement_form() {
+<span class="nc" id="L82">        return fk_id_etablissement_form;</span>
+    }
+  
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.7.201606060606</span></div></body></html>

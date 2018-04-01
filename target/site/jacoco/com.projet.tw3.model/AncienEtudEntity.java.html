@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>AncienEtudEntity.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">TW3</a> &gt; <a href="index.source.html" class="el_package">com.projet.tw3.model</a> &gt; <span class="el_source">AncienEtudEntity.java</span></div><h1>AncienEtudEntity.java</h1><pre class="source lang-java linenums">/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package com.projet.tw3.model;
+
+import java.sql.Date;
+
+/**
+ *
+ * @author floriandenise
+ */
+public class AncienEtudEntity {
+    private int id_etud;
+	private String nom;
+	private String prenom;
+	private String mail;
+	private Date promotion;
+
+    public AncienEtudEntity() {
+<span class="nc" id="L22">        super();</span>
+<span class="nc" id="L23">    }</span>
+
+<span class="nc" id="L25">    public AncienEtudEntity(String nom, String prenom, String mail, Date promotion, String specialite, String cursus, int id_moyenne) {</span>
+<span class="nc" id="L26">        this.nom = nom;</span>
+<span class="nc" id="L27">        this.prenom = prenom;</span>
+<span class="nc" id="L28">        this.mail = mail;</span>
+<span class="nc" id="L29">        this.promotion = promotion;</span>
+<span class="nc" id="L30">        this.specialite = specialite;</span>
+<span class="nc" id="L31">        this.cursus = cursus;</span>
+<span class="nc" id="L32">        this.id_moyenne = id_moyenne;</span>
+<span class="nc" id="L33">    }</span>
+
+    public void setId_etud(int id_etud) {
+<span class="nc" id="L36">        this.id_etud = id_etud;</span>
+<span class="nc" id="L37">    }</span>
+
+    public void setNom(String nom) {
+<span class="nc" id="L40">        this.nom = nom;</span>
+<span class="nc" id="L41">    }</span>
+
+    public void setPrenom(String prenom) {
+<span class="nc" id="L44">        this.prenom = prenom;</span>
+<span class="nc" id="L45">    }</span>
+
+    public void setMail(String mail) {
+<span class="nc" id="L48">        this.mail = mail;</span>
+<span class="nc" id="L49">    }</span>
+
+    public void setPromotion(Date promotion) {
+<span class="nc" id="L52">        this.promotion = promotion;</span>
+<span class="nc" id="L53">    }</span>
+
+    public void setSpecialite(String specialite) {
+<span class="nc" id="L56">        this.specialite = specialite;</span>
+<span class="nc" id="L57">    }</span>
+
+    public void setCursus(String cursus) {
+<span class="nc" id="L60">        this.cursus = cursus;</span>
+<span class="nc" id="L61">    }</span>
+
+    public void setId_moyenne(int id_moyenne) {
+<span class="nc" id="L64">        this.id_moyenne = id_moyenne;</span>
+<span class="nc" id="L65">    }</span>
+
+    public int getId_etud() {
+<span class="nc" id="L68">        return id_etud;</span>
+    }
+
+    public String getNom() {
+<span class="nc" id="L72">        return nom;</span>
+    }
+
+    public String getPrenom() {
+<span class="nc" id="L76">        return prenom;</span>
+    }
+
+    public String getMail() {
+<span class="nc" id="L80">        return mail;</span>
+    }
+
+    public Date getPromotion() {
+<span class="nc" id="L84">        return promotion;</span>
+    }
+
+    public String getSpecialite() {
+<span class="nc" id="L88">        return specialite;</span>
+    }
+
+    public String getCursus() {
+<span class="nc" id="L92">        return cursus;</span>
+    }
+
+    public int getId_moyenne() {
+<span class="nc" id="L96">        return id_moyenne;</span>
+    }
+	private String specialite;
+	private String cursus ;
+	private int id_moyenne;
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.7.201606060606</span></div></body></html>

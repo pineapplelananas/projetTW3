@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>FormationByStateServlet.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">TW3</a> &gt; <a href="index.source.html" class="el_package">com.projet.tw3.servlet</a> &gt; <span class="el_source">FormationByStateServlet.java</span></div><h1>FormationByStateServlet.java</h1><pre class="source lang-java linenums">/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package com.projet.tw3.servlet;
+
+import com.google.gson.Gson;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.sql.SQLException;
+import java.text.ParseException;
+import java.util.List;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import com.projet.tw3.model.DAO;
+import com.projet.tw3.model.DataSourceFactory;
+import com.projet.tw3.model.FormByStateEntity;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+
+/**
+ *
+ * @author floriandenise
+ */
+@WebServlet(name = &quot;FormationByStateServlet&quot;, urlPatterns = {&quot;/FormationByStateServlet&quot;})
+<span class="nc" id="L31">public class FormationByStateServlet extends HttpServlet {</span>
+
+    /**
+     * Processes requests for both HTTP &lt;code&gt;GET&lt;/code&gt; and &lt;code&gt;POST&lt;/code&gt;
+     * methods.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+        throws ServletException, IOException, ParseException, SQLException {
+<span class="nc" id="L44">        DAO dao = new DAO(DataSourceFactory.getDataSource());</span>
+
+<span class="nc" id="L46">        List&lt;FormByStateEntity&gt; list = null;</span>
+       
+                //on récupère la liste générée par la méthode du dao
+<span class="nc" id="L49">                list = dao.nbFormByState();</span>
+            
+            //on try d'ouvrir un flux sortant
+<span class="nc" id="L52">            try (PrintWriter out = response.getWriter()) {</span>
+<span class="nc" id="L53">                response.setContentType(&quot;application/json;charset=UTF-8&quot;);</span>
+                //on parse la liste en json
+<span class="nc" id="L55">                Gson gson = new Gson();</span>
+<span class="nc" id="L56">                String gsonData = gson.toJson(list);</span>
+                //on envoie sur le flux sortant
+<span class="nc" id="L58">                out.println(gsonData);</span>
+<span class="nc bnc" id="L59" title="All 8 branches missed.">            }</span>
+      
+<span class="nc" id="L61">    }</span>
+    // &lt;editor-fold defaultstate=&quot;collapsed&quot; desc=&quot;HttpServlet methods. Click on the + sign on the left to edit the code.&quot;&gt;
+    /**
+     * Handles the HTTP &lt;code&gt;GET&lt;/code&gt; method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        try {
+<span class="nc" id="L75">            processRequest(request, response);</span>
+<span class="nc" id="L76">        } catch (ParseException ex) {</span>
+<span class="nc" id="L77">            Logger.getLogger(FormationByStateServlet.class.getName()).log(Level.SEVERE, null, ex);</span>
+<span class="nc" id="L78">        } catch (SQLException ex) {</span>
+<span class="nc" id="L79">            Logger.getLogger(FormationByStateServlet.class.getName()).log(Level.SEVERE, null, ex);</span>
+<span class="nc" id="L80">        }</span>
+<span class="nc" id="L81">    }</span>
+
+    /**
+     * Handles the HTTP &lt;code&gt;POST&lt;/code&gt; method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        try {
+<span class="nc" id="L95">            processRequest(request, response);</span>
+<span class="nc" id="L96">        } catch (ParseException ex) {</span>
+<span class="nc" id="L97">            Logger.getLogger(FormationByStateServlet.class.getName()).log(Level.SEVERE, null, ex);</span>
+<span class="nc" id="L98">        } catch (SQLException ex) {</span>
+<span class="nc" id="L99">            Logger.getLogger(FormationByStateServlet.class.getName()).log(Level.SEVERE, null, ex);</span>
+<span class="nc" id="L100">        }</span>
+<span class="nc" id="L101">    }</span>
+
+    /**
+     * Returns a short description of the servlet.
+     *
+     * @return a String containing servlet description
+     */
+    @Override
+    public String getServletInfo() {
+<span class="nc" id="L110">        return &quot;Short description&quot;;</span>
+    }// &lt;/editor-fold&gt;
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.7.201606060606</span></div></body></html>

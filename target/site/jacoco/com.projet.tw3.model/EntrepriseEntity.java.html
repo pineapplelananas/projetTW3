@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>EntrepriseEntity.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">TW3</a> &gt; <a href="index.source.html" class="el_package">com.projet.tw3.model</a> &gt; <span class="el_source">EntrepriseEntity.java</span></div><h1>EntrepriseEntity.java</h1><pre class="source lang-java linenums">/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package com.projet.tw3.model;
+
+/**
+ *
+ * @author floriandenise
+ */
+public class EntrepriseEntity {
+    private int id_entreprise;
+  private String nom_ese;
+  private String adresse_ese;
+  private String secteur_activite_ese;
+  private String ville_ese;
+  private String code_postal_ese;
+  private String pays_ese;
+  private String fk_id_region_ese;
+
+    public void setId_entreprise(int id_entreprise) {
+<span class="nc" id="L23">        this.id_entreprise = id_entreprise;</span>
+<span class="nc" id="L24">    }</span>
+
+    public void setNom_ese(String nom_ese) {
+<span class="nc" id="L27">        this.nom_ese = nom_ese;</span>
+<span class="nc" id="L28">    }</span>
+
+    public void setAdresse_ese(String adresse_ese) {
+<span class="nc" id="L31">        this.adresse_ese = adresse_ese;</span>
+<span class="nc" id="L32">    }</span>
+
+    public void setSecteur_activite_ese(String secteur_activite_ese) {
+<span class="nc" id="L35">        this.secteur_activite_ese = secteur_activite_ese;</span>
+<span class="nc" id="L36">    }</span>
+
+    public void setVille_ese(String ville_ese) {
+<span class="nc" id="L39">        this.ville_ese = ville_ese;</span>
+<span class="nc" id="L40">    }</span>
+
+    public void setCode_postal_ese(String code_postal_ese) {
+<span class="nc" id="L43">        this.code_postal_ese = code_postal_ese;</span>
+<span class="nc" id="L44">    }</span>
+
+    public void setPays_ese(String pays_ese) {
+<span class="nc" id="L47">        this.pays_ese = pays_ese;</span>
+<span class="nc" id="L48">    }</span>
+
+    public void setFk_id_region_ese(String fk_id_region_ese) {
+<span class="nc" id="L51">        this.fk_id_region_ese = fk_id_region_ese;</span>
+<span class="nc" id="L52">    }</span>
+
+    public int getId_entreprise() {
+<span class="nc" id="L55">        return id_entreprise;</span>
+    }
+
+    public String getNom_ese() {
+<span class="nc" id="L59">        return nom_ese;</span>
+    }
+
+    public String getAdresse_ese() {
+<span class="nc" id="L63">        return adresse_ese;</span>
+    }
+
+    public String getSecteur_activite_ese() {
+<span class="nc" id="L67">        return secteur_activite_ese;</span>
+    }
+
+    public String getVille_ese() {
+<span class="nc" id="L71">        return ville_ese;</span>
+    }
+
+    public String getCode_postal_ese() {
+<span class="nc" id="L75">        return code_postal_ese;</span>
+    }
+
+    public String getPays_ese() {
+<span class="nc" id="L79">        return pays_ese;</span>
+    }
+
+    public String getFk_id_region_ese() {
+<span class="nc" id="L83">        return fk_id_region_ese;</span>
+    }
+
+<span class="nc" id="L86">    public EntrepriseEntity(String nom_ese, String adresse_ese, String secteur_activite_ese, String ville_ese, String code_postal_ese, String pays_ese, String fk_id_region_ese) {</span>
+<span class="nc" id="L87">        this.nom_ese = nom_ese;</span>
+<span class="nc" id="L88">        this.adresse_ese = adresse_ese;</span>
+<span class="nc" id="L89">        this.secteur_activite_ese = secteur_activite_ese;</span>
+<span class="nc" id="L90">        this.ville_ese = ville_ese;</span>
+<span class="nc" id="L91">        this.code_postal_ese = code_postal_ese;</span>
+<span class="nc" id="L92">        this.pays_ese = pays_ese;</span>
+<span class="nc" id="L93">        this.fk_id_region_ese = fk_id_region_ese;</span>
+<span class="nc" id="L94">    }</span>
+
+<span class="nc" id="L96">    public EntrepriseEntity(int id_entreprise, String nom_ese, String adresse_ese, String secteur_activite_ese, String ville_ese, String code_postal_ese, String pays_ese, String fk_id_region_ese) {</span>
+<span class="nc" id="L97">        this.id_entreprise = id_entreprise;</span>
+<span class="nc" id="L98">        this.nom_ese = nom_ese;</span>
+<span class="nc" id="L99">        this.adresse_ese = adresse_ese;</span>
+<span class="nc" id="L100">        this.secteur_activite_ese = secteur_activite_ese;</span>
+<span class="nc" id="L101">        this.ville_ese = ville_ese;</span>
+<span class="nc" id="L102">        this.code_postal_ese = code_postal_ese;</span>
+<span class="nc" id="L103">        this.pays_ese = pays_ese;</span>
+<span class="nc" id="L104">        this.fk_id_region_ese = fk_id_region_ese;</span>
+<span class="nc" id="L105">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.7.201606060606</span></div></body></html>

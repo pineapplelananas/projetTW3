@@ -1,0 +1,544 @@
+ <!DOCTYPE html>
+<html>
+	<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+	<meta charset="UTF-8">
+	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.1/dist/leaflet.css"
+	   integrity="sha512-Rksm5RenBEKSKFjgI3a41vrjkw4EVPlJ3+OiI65vTjIdo9brlAacEuKOiQ5OFh7cOI1bkDwLqdLw3Zg0cRJAAQ=="
+	   crossorigin=""/>
+	<link rel="stylesheet" href="test.css"/>
+	<!-- Make sure you put this AFTER Leaflet's CSS -->
+	<script src="https://unpkg.com/leaflet@1.3.1/dist/leaflet.js"
+	   integrity="sha512-/Nsx9X4HebavoBvEBuyp3I7od5tA0UzAxs+j83KgC8PU0kgB4XiK4Lfe4y4cgBtaRJQEIFCW+oC506aPT2L1zw=="
+	   crossorigin="">
+	</script>
+
+	<script src='https://api.mapbox.com/mapbox-gl-js/v0.44.1/mapbox-gl.js'></script>
+	<link href='https://api.mapbox.com/mapbox-gl-js/v0.44.1/mapbox-gl.css' rel='stylesheet' />
+
+
+	<link rel="stylesheet" type="text/css" href="semantic/semantic.min.css">
+		<script
+		  src="https://code.jquery.com/jquery-3.1.1.min.js"
+		  integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+		  crossorigin="anonymous"></script>
+		<script src="semantic/semantic.min.js"></script>
+	<script>
+	$(document).ready(function() {
+			// faire fonction qui ajoute un formulaire quand on selectionne une table 
+function chargerTabAE(){		
+
+console.log('Etudiants cgargé 1/2');
+			
+				 $.ajax({
+            type: "GET", //rest Type
+            dataType: 'json', //mispelled
+            url: "tabEtud.js",
+            async: true,
+            contentType: "application/json; charset=utf-8",
+            success: function (donnees) {
+            	for(var i = 0; i<donnees.length;i++){
+          		 $('#tabAE').append('<td>'+donnees[i].id_etud+'</td><tr><td>'+donnees[i].nom_etud+'</td><td>'+donnees[i].prenom_etud+'</td>td>'+donnees[i].mail_etud+'</td><td>'+  donnees[i].promotion_etud  +'</td><td>'+  donnees[i].fk_id_specialite_etud  +'</td><td>'+  donnees[i].fk_id_cursus_etud  +'</td><td>'+  donnees[i].fk_id_moyenne_l3_etud  +'</td><tr>');
+           			
+   					console.log('etud chager 2/2');
+   													};
+   
+  
+           								 }
+	        			});
+					};
+function chargerTabFormation(){		
+	$('select.dropdown').dropdown();
+				
+				$('.ui.sticky')
+				  .sticky({
+				    context: '#all-content'
+				  });
+				  $('.menu .item')
+  .tab();
+		
+
+console.log('Formation chargé 1/2');
+			
+				 $.ajax({
+            type: "GET", //rest Type
+            dataType: 'json', //mispelled
+            url: "tabFormation.js",
+            async: true,
+            contentType: "application/json; charset=utf-8",
+            success: function (donnees) {
+            	for(var i = 0; i<donnees.length;i++){
+          		 $('#tabFormation').append('<td>'+donnees[i].id_formation+'</td><tr><td>'+donnees[i].intitule_form+'</td><td>'+donnees[i].sigle_form+'</td>td>'+donnees[i].type_form+'</td><td>'+  donnees[i].lib_specialite_form  +'</td><td>'+  donnees[i].nom_etab+'</td><td>'+  donnees[i].ville_etab+'</td><td>'+  donnees[i].nom_region+'</td><tr>');
+           			
+   					console.log('formation chager 2/2');
+   													};
+   
+  
+           								 }
+	        			});
+					};
+chargerTabFormation();
+chargerTabAE();
+				});
+	</script>
+	<title>Page Admin Réseau Anciens Etudiants Info INUC</title>
+
+	</head>
+
+	<body>
+		<div id="all-content">
+		<div class="ui center aligned header">
+		<button class="ui facebook button">
+		  <i class="facebook icon"></i>
+		  Facebook
+		</button>
+		<button class="ui linkedin button">
+		  <i class="linkedin icon"></i>
+		  LinkedIn
+		</button>
+		<button class="ui facebook button"><i class="graduation cap icon"></i>Univ. Champollion</button>
+		</div>
+		<div class="ui middle aligned center aligned grid">
+  
+    <div class="six wide column">
+      <img class="ui centered small rounded image" src="LOGO_CHAMPOLLION.png">
+    </div>
+    <div class="ten wide column">
+    <h1>Page Admin</h1>
+      <h1>Université Jean-François Champollion</h1>
+    </div>
+  
+  </div>
+		
+		
+		<div id="sub-header" class="ui middle aligned center aligned grid">
+		<div class="sixteen wide column">
+		<h5>Admin page : ajout, modification, suppression/h5>	
+		</div>
+		</div>
+		<div class="ui segments">
+  <div class="ui segment">
+    <p>Actions</p>
+  </div>
+  <div class="ui segments">
+    <div class="ui segment">
+      <p>Ajouter un élément</p>
+	      <select name="selectTab" class="ui fluid dropdown">
+			<option value="">Sélectionnez une table</option>
+			<option value="v_ancien_etudiant">ancien_etudiant</option>
+			<option value="v_a_effectue">a_effectue</option>
+			<option value="v_cursus">cursus</option>
+			<option value="v_entreprise">entreprise</option>
+			<option value="v_formation">formation</option>
+			<option value="v_moyenne_l3">moyenne_l3</option>
+			<option value="v_poste">poste</option>
+			<option value="v_region">region</option>
+			<option value="v_specialite">specialite</option>
+			<option value="v_statut">statut</option>
+
+	</select>
+    </div>
+    <div class="ui segment">
+      <p>Supprimer un élément</p>
+        <select name="selectTab" class="ui fluid dropdown">
+			<option value="">Sélectionnez une table</option>
+			<option value="v_ancien_etudiant">ancien_etudiant</option>
+			<option value="v_a_effectue">a_effectue</option>
+			<option value="v_cursus">cursus</option>
+			<option value="v_entreprise">entreprise</option>
+			<option value="v_formation">formation</option>
+			<option value="v_moyenne_l3">moyenne_l3</option>
+			<option value="v_poste">poste</option>
+			<option value="v_region">region</option>
+			<option value="v_specialite">specialite</option>
+			<option value="v_statut">statut</option>
+
+	</select>
+    </div>
+    <div class="ui segment">
+      <p>Modifier un élément</p>
+        <select name="selectTab" class="ui fluid dropdown">
+			<option value="">Sélectionnez une table</option>
+			<option value="v_ancien_etudiant">ancien_etudiant</option>
+			<option value="v_a_effectue">a_effectue</option>
+			<option value="v_cursus">cursus</option>
+			<option value="v_entreprise">entreprise</option>
+			<option value="v_formation">formation</option>
+			<option value="v_moyenne_l3">moyenne_l3</option>
+			<option value="v_poste">poste</option>
+			<option value="v_region">region</option>
+			<option value="v_specialite">specialite</option>
+			<option value="v_statut">statut</option>
+
+	</select>
+    </div>
+  </div>
+  <div class="ui segment">
+    <p>Tables de la base de données de l'application</p>
+  </div>
+  <div class="ui horizontal segments">
+    <div class="ui segment">
+      <p>Top</p>
+    </div>
+    <div class="ui segment">
+      <div class="ui top attached tabular menu">
+								  <a class="item" data-tab="ancien_etudiant">ancien_etudiant</a>
+								  <a class="item" data-tab="a_effectue">a_effectue</a>
+								  <a class="item" data-tab="cursus">cursus</a>
+								  <a class="item" data-tab="entreprise">entreprise</a>
+								  <a class="item" data-tab="formation">formation</a>
+								  <a class="item" data-tab="moyenne">moyenne_l3</a>
+								  <a class="item" data-tab="poste">poste</a>
+								  <a class="item" data-tab="region">region</a>
+								  <a class="item" data-tab="specialite">specialite</a>
+								  <a class="item active" data-tab="statut">statut</a>
+							</div>
+								<div class="ui bottom attached tab segment" data-tab="ancien_etudiant">
+								  <table id="tabAE" class="ui celled table">
+									  <thead>
+									     <tr>
+									              
+									                 <th>id_etud</th>
+									                <th>nom_etud</th>
+									                <th>prenom_etud</th>
+									                <th>mail_etud</th>
+									                <th>promotion_etud</th>
+									                <th>fk_id_specialite_etud</th>
+									                <th>fk_id_cursus_etud</th>
+									                <th>fk_id_moyenne_l3_etud</th>
+									            </tr></thead>
+									  <tbody>
+									    
+									  </tbody>
+									  <tfoot>
+									    <tr><th colspan="3">
+									      <div class="ui right floated pagination menu">
+									        <a class="icon item">
+									          <i class="left chevron icon"></i>
+									        </a>
+									        <a class="item">1</a>
+									        <a class="item">2</a>
+									        <a class="item">3</a>
+									        <a class="item">4</a>
+									        <a class="icon item">
+									          <i class="right chevron icon"></i>
+									        </a>
+									      </div>
+									    </th>
+									  </tr></tfoot>
+									</table>
+								</div>
+								<div class="ui bottom attached tab segment" data-tab="a_effectue">
+								  <table id="tabEffectue" class="ui celled table">
+									  <thead>
+									     <tr>
+									              
+									                 <th>debut_formation</th>
+									                <th>fk_id_formation</th>
+									                <th>fk_id_etud</th>
+									                <th>fk_statut_id</th>
+									                
+									            </tr></thead>
+									  <tbody >
+									    
+									  </tbody>
+									  <tfoot>
+									    <tr><th colspan="3">
+									      <div class="ui right floated pagination menu">
+									        <a class="icon item">
+									          <i class="left chevron icon"></i>
+									        </a>
+									        <a class="item">1</a>
+									        <a class="item">2</a>
+									        <a class="item">3</a>
+									        <a class="item">4</a>
+									        <a class="icon item">
+									          <i class="right chevron icon"></i>
+									        </a>
+									      </div>
+									    </th>
+									  </tr></tfoot>
+									</table>
+								</div>
+								<div class="ui bottom attached tab segment active" data-tab="cursus">
+								  <table id="tabCursus" class="ui celled table">
+									  <thead>
+									     <tr>
+									              
+									                 <th>id_cursus</th>
+									                <th>lib_cursus</th>
+									                
+									            </tr></thead>
+									  <tbody>
+									    
+									  </tbody>
+									  <tfoot>
+									    <tr><th colspan="3">
+									      <div class="ui right floated pagination menu">
+									        <a class="icon item">
+									          <i class="left chevron icon"></i>
+									        </a>
+									        <a class="item">1</a>
+									        <a class="item">2</a>
+									        <a class="item">3</a>
+									        <a class="item">4</a>
+									        <a class="icon item">
+									          <i class="right chevron icon"></i>
+									        </a>
+									      </div>
+									    </th>
+									  </tr></tfoot>
+									</table>
+								</div>
+								<div class="ui bottom attached tab segment active" data-tab="entreprise">
+								  <table id="tabEntreprise"  class="ui celled table">
+									  <thead>
+									     <tr>
+									              
+									                 <th>id_entreprise</th>
+									                <th>nom_ese</th>
+									                <th>adresse_ese</th>
+									                <th>secteur_activite_ese</th>
+									                <th>ville_ese</th>
+									                <th>code_postal_ese</th>
+									                <th>pays_ese</th>
+									                <th>fk_id_region_ese</th>
+									            </tr></thead>
+									  <tbody>
+									    
+									  </tbody>
+									  <tfoot>
+									    <tr><th colspan="3">
+									      <div class="ui right floated pagination menu">
+									        <a class="icon item">
+									          <i class="left chevron icon"></i>
+									        </a>
+									        <a class="item">1</a>
+									        <a class="item">2</a>
+									        <a class="item">3</a>
+									        <a class="item">4</a>
+									        <a class="icon item">
+									          <i class="right chevron icon"></i>
+									        </a>
+									      </div>
+									    </th>
+									  </tr></tfoot>
+									</table>
+								</div>
+								<div class="ui bottom attached tab segment active" data-tab="formation">
+								  <table id="tabFormation" class="ui celled table">
+									  <thead>
+									     <tr>
+									              
+									                 <th>id_formation</th>
+									                <th>intitule_form</th>
+									                <th>sigle_form</th>
+									                <th>type_form</th>
+									                <th>fk_id_specialite_form</th>
+									                <th>fk_id_etablissement_form</th>
+									            </tr></thead>
+									  <tbody>
+									    
+									  </tbody>
+									  <tfoot>
+									    <tr><th colspan="3">
+									      <div class="ui right floated pagination menu">
+									        <a class="icon item">
+									          <i class="left chevron icon"></i>
+									        </a>
+									        <a class="item">1</a>
+									        <a class="item">2</a>
+									        <a class="item">3</a>
+									        <a class="item">4</a>
+									        <a class="icon item">
+									          <i class="right chevron icon"></i>
+									        </a>
+									      </div>
+									    </th>
+									  </tr></tfoot>
+									</table>
+								</div>
+								<div class="ui bottom attached tab segment active" data-tab="moyenne">
+								  <table id="tabMoyenne" class="ui celled table">
+									  <thead>
+									     <tr>
+									              
+									                 <th>id_moyenne</th>
+									                <th>mention</th>
+									               
+									            </tr></thead>
+									  <tbody>
+									    
+									  </tbody>
+									  <tfoot>
+									    <tr><th colspan="3">
+									      <div class="ui right floated pagination menu">
+									        <a class="icon item">
+									          <i class="left chevron icon"></i>
+									        </a>
+									        <a class="item">1</a>
+									        <a class="item">2</a>
+									        <a class="item">3</a>
+									        <a class="item">4</a>
+									        <a class="icon item">
+									          <i class="right chevron icon"></i>
+									        </a>
+									      </div>
+									    </th>
+									  </tr></tfoot>
+									</table>
+								</div>
+								<div class="ui bottom attached tab segment active" data-tab="poste">
+								  <table id="tabPoste" class="ui celled table">
+									  <thead>
+									     <tr>
+									              
+									                 <th>intitule_poste</th>
+									                <th>debut_poste</th>
+									                <th>fin_posteth>
+									                <th>description_poste</th>
+									                <th>specialite_poste</th>
+									                <th>fk_id_etud_poste</th>
+									                <th>fk_id_entreprise_poste</th>
+									            </tr></thead>
+									  <tbody>
+									    
+									  </tbody>
+									  <tfoot>
+									    <tr><th colspan="3">
+									      <div class="ui right floated pagination menu">
+									        <a class="icon item">
+									          <i class="left chevron icon"></i>
+									        </a>
+									        <a class="item">1</a>
+									        <a class="item">2</a>
+									        <a class="item">3</a>
+									        <a class="item">4</a>
+									        <a class="icon item">
+									          <i class="right chevron icon"></i>
+									        </a>
+									      </div>
+									    </th>
+									  </tr></tfoot>
+									</table>
+								</div>
+								<div class="ui bottom attached tab segment active" data-tab="region">
+								  <table id="tabReg" class="ui celled table">
+									  <thead>
+									     <tr>
+									              
+									                 <th>id_region</th>
+									                <th>nom_region</th>
+									               
+									            </tr></thead>
+									  <tbody>
+									    
+									  </tbody>
+									  <tfoot>
+									    <tr><th colspan="3">
+									      <div class="ui right floated pagination menu">
+									        <a class="icon item">
+									          <i class="left chevron icon"></i>
+									        </a>
+									        <a class="item">1</a>
+									        <a class="item">2</a>
+									        <a class="item">3</a>
+									        <a class="item">4</a>
+									        <a class="icon item">
+									          <i class="right chevron icon"></i>
+									        </a>
+									      </div>
+									    </th>
+									  </tr></tfoot>
+									</table>
+								</div>
+								<div class="ui bottom attached tab segment active" data-tab="specialite">
+								  <table id="tabSpe" class="ui celled table">
+									  <thead>
+									     <tr>
+									              
+									                 <th>id_specialite</th>
+									                <th>lib_specialite</th>
+									               
+									            </tr></thead>
+									  <tbody>
+									    
+									  </tbody>
+									  <tfoot>
+									    <tr><th colspan="3">
+									      <div class="ui right floated pagination menu">
+									        <a class="icon item">
+									          <i class="left chevron icon"></i>
+									        </a>
+									        <a class="item">1</a>
+									        <a class="item">2</a>
+									        <a class="item">3</a>
+									        <a class="item">4</a>
+									        <a class="icon item">
+									          <i class="right chevron icon"></i>
+									        </a>
+									      </div>
+									    </th>
+									  </tr></tfoot>
+									</table>
+								</div>
+								<div class="ui bottom attached tab segment active" data-tab="statut">
+								  <table id="tabStatut" class="ui celled table">
+									  <thead>
+									     <tr>
+									              
+									                 <th>id_statut</th>
+									                <th>lib_statut</th>
+									                
+									            </tr></thead>
+									  <tbody>
+									    
+									  </tbody>
+									  <tfoot>
+									    <tr><th colspan="3">
+									      <div class="ui right floated pagination menu">
+									        <a class="icon item">
+									          <i class="left chevron icon"></i>
+									        </a>
+									        <a class="item">1</a>
+									        <a class="item">2</a>
+									        <a class="item">3</a>
+									        <a class="item">4</a>
+									        <a class="icon item">
+									          <i class="right chevron icon"></i>
+									        </a>
+									      </div>
+									    </th>
+									  </tr></tfoot>
+									</table>
+								</div>
+    </div>
+    <div class="ui segment">
+      <p>Bottom</p>
+    </div>
+  </div>
+  <div class="ui segment">
+    <p>Bottom</p>
+  </div>
+</div>
+			
+					
+				
+			
+			<div id="footer" class="ui stackable three column grid">
+			<div class="ui middle aligned center aligned column">
+				<button class="ui inverted button">Connexion ancien étudiant</button>
+				
+			</div>
+			<div class="ui middle aligned center aligned column">
+				<i class="copyright icon"></i>2018 - Pour toute question, s'adresser à l'Université Jean-François Champollion
+			</div>
+			<div class="ui middle aligned center aligned column">
+				Site réalisé par les étudiants de la Licence 3 Informatique
+				
+			</div>
+			</div>
+			</div>
+		
+	</body>
+</html> 

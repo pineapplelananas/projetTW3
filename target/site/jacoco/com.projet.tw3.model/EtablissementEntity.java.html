@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>EtablissementEntity.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">TW3</a> &gt; <a href="index.source.html" class="el_package">com.projet.tw3.model</a> &gt; <span class="el_source">EtablissementEntity.java</span></div><h1>EtablissementEntity.java</h1><pre class="source lang-java linenums">/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package com.projet.tw3.model;
+
+/**
+ *
+ * @author floriandenise
+ */
+public class EtablissementEntity {
+   private int id_etablissement;
+  private String nom_etab;
+  private String sigle_etab;
+  private String code_postal_etab;
+  private String ville_etab;
+  private String pays_etab;
+  private int fk_id_region_etab;
+
+    public int getId_etablissement() {
+<span class="nc" id="L22">        return id_etablissement;</span>
+    }
+
+    public String getNom_etab() {
+<span class="nc" id="L26">        return nom_etab;</span>
+    }
+
+    public String getSigle_etab() {
+<span class="nc" id="L30">        return sigle_etab;</span>
+    }
+
+    public String getCode_postal_etab() {
+<span class="nc" id="L34">        return code_postal_etab;</span>
+    }
+
+    public String getVille_etab() {
+<span class="nc" id="L38">        return ville_etab;</span>
+    }
+
+    public String getPays_etab() {
+<span class="nc" id="L42">        return pays_etab;</span>
+    }
+
+    public int getFk_id_region_etab() {
+<span class="nc" id="L46">        return fk_id_region_etab;</span>
+    }
+
+    public void setId_etablissement(int id_etablissement) {
+<span class="nc" id="L50">        this.id_etablissement = id_etablissement;</span>
+<span class="nc" id="L51">    }</span>
+
+    public void setNom_etab(String nom_etab) {
+<span class="nc" id="L54">        this.nom_etab = nom_etab;</span>
+<span class="nc" id="L55">    }</span>
+
+    public void setSigle_etab(String sigle_etab) {
+<span class="nc" id="L58">        this.sigle_etab = sigle_etab;</span>
+<span class="nc" id="L59">    }</span>
+
+    public void setCode_postal_etab(String code_postal_etab) {
+<span class="nc" id="L62">        this.code_postal_etab = code_postal_etab;</span>
+<span class="nc" id="L63">    }</span>
+
+    public void setVille_etab(String ville_etab) {
+<span class="nc" id="L66">        this.ville_etab = ville_etab;</span>
+<span class="nc" id="L67">    }</span>
+
+    public void setPays_etab(String pays_etab) {
+<span class="nc" id="L70">        this.pays_etab = pays_etab;</span>
+<span class="nc" id="L71">    }</span>
+
+    public void setFk_id_region_etab(int fk_id_region_etab) {
+<span class="nc" id="L74">        this.fk_id_region_etab = fk_id_region_etab;</span>
+<span class="nc" id="L75">    }</span>
+
+<span class="nc" id="L77">    public EtablissementEntity(String nom_etab, String sigle_etab, String code_postal_etab, String ville_etab, String pays_etab, int fk_id_region_etab) {</span>
+<span class="nc" id="L78">        this.nom_etab = nom_etab;</span>
+<span class="nc" id="L79">        this.sigle_etab = sigle_etab;</span>
+<span class="nc" id="L80">        this.code_postal_etab = code_postal_etab;</span>
+<span class="nc" id="L81">        this.ville_etab = ville_etab;</span>
+<span class="nc" id="L82">        this.pays_etab = pays_etab;</span>
+<span class="nc" id="L83">        this.fk_id_region_etab = fk_id_region_etab;</span>
+<span class="nc" id="L84">    }</span>
+
+<span class="nc" id="L86">    public EtablissementEntity(int id_etablissement, String nom_etab, String sigle_etab, String code_postal_etab, String ville_etab, String pays_etab, int fk_id_region_etab) {</span>
+<span class="nc" id="L87">        this.id_etablissement = id_etablissement;</span>
+<span class="nc" id="L88">        this.nom_etab = nom_etab;</span>
+<span class="nc" id="L89">        this.sigle_etab = sigle_etab;</span>
+<span class="nc" id="L90">        this.code_postal_etab = code_postal_etab;</span>
+<span class="nc" id="L91">        this.ville_etab = ville_etab;</span>
+<span class="nc" id="L92">        this.pays_etab = pays_etab;</span>
+<span class="nc" id="L93">        this.fk_id_region_etab = fk_id_region_etab;</span>
+<span class="nc" id="L94">    }</span>
+  
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.7.201606060606</span></div></body></html>

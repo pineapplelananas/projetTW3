@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>DAO.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">TW3</a> &gt; <a href="index.source.html" class="el_package">com.projet.tw3.model</a> &gt; <span class="el_source">DAO.java</span></div><h1>DAO.java</h1><pre class="source lang-java linenums">/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package com.projet.tw3.model;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.sql.DataSource;
+
+/**
+ *
+ * @author floriandenise
+ */
+public class DAO {
+    private final DataSource myDataSource;
+
+    /**
+     * Construit le DAO avec sa source de données
+     *
+     * @param dataSource la source de données à utiliser
+     */
+<span class="nc" id="L36">    public DAO(DataSource dataSource) {</span>
+<span class="nc" id="L37">        this.myDataSource = dataSource;</span>
+<span class="nc" id="L38">    }</span>
+public void addEtab(String _nom_etab,String _sigle_etab,String _code_postal_etab,String _ville_etab,String _pays_etab,int _fk_id_region) throws DAOException {
+<span class="nc" id="L40">        String sql = &quot;INSERT INTO etablissement VALUES (?, ?, ?, ?, ?, ?)&quot;;</span>
+<span class="nc" id="L41">        try (Connection connection = myDataSource.getConnection(); // Ouvrir une connexion</span>
+<span class="nc" id="L42">                PreparedStatement stmt = connection.prepareStatement(sql);) {</span>
+
+<span class="nc" id="L44">            String nom_etab = _nom_etab;</span>
+<span class="nc" id="L45">            String sigle_etab = _sigle_etab;</span>
+<span class="nc" id="L46">            String code_postal_etab = _code_postal_etab;</span>
+<span class="nc" id="L47">            String ville_etab = _ville_etab;</span>
+<span class="nc" id="L48">            String pays_etab = _pays_etab;</span>
+<span class="nc" id="L49">            int fk_id_region = _fk_id_region;</span>
+
+
+<span class="nc" id="L52">            stmt.setString(1, nom_etab);</span>
+<span class="nc" id="L53">            stmt.setString(2, sigle_etab);</span>
+<span class="nc" id="L54">            stmt.setString(3, code_postal_etab);</span>
+<span class="nc" id="L55">            stmt.setString(4, ville_etab);</span>
+<span class="nc" id="L56">            stmt.setString(5, pays_etab);</span>
+<span class="nc" id="L57">            stmt.setInt(6, fk_id_region);</span>
+
+<span class="nc" id="L59">            int rs = stmt.executeUpdate();</span>
+<span class="nc bnc" id="L60" title="All 2 branches missed.">            if (rs == 0) {</span>
+<span class="nc" id="L61">                throw new DAOException(&quot;aucun établissement n'a été ajouté&quot;);</span>
+            }
+
+<span class="nc bnc" id="L64" title="All 16 branches missed.">        } catch (SQLException ex) {</span>
+<span class="nc" id="L65">            Logger.getLogger(&quot;DAO&quot;).log(Level.SEVERE, null, ex);</span>
+<span class="nc" id="L66">            throw new DAOException(ex.getMessage());</span>
+<span class="nc" id="L67">        }</span>
+
+<span class="nc" id="L69">    }</span>
+ /*
+     * Permet de connaître le chiffre d'affaires par catégorie de produit
+     * réalisé entre deux certaines dates
+     *
+     * @param date_debut le début de la période étudiée
+     * @param date_fin la fin de la période étudiée
+     * @return une liste d'entités Revenue
+     * @throws SQLException
+     * @throws ParseException
+     */
+    public List&lt;FormByStateEntity&gt; nbFormByState() throws SQLException, ParseException {
+
+<span class="nc" id="L82">        List&lt;FormByStateEntity&gt; result = new LinkedList&lt;&gt;();</span>
+
+<span class="nc" id="L84">        String sql = &quot;SELECT region.nom_region,COUNT(formation.intitule_form) as nbFormation FROM  etablissement, formation, region WHERE etablissement.fk_id_region_etab=region.id_region AND formation.fk_id_etablissement_form=etablissement.id_etablissement GROUP BY region.nom_region&quot;;</span>
+<span class="nc" id="L85">                try (Connection connection = myDataSource.getConnection();</span>
+<span class="nc" id="L86">                PreparedStatement stmt = connection.prepareStatement(sql)) {</span>
+
+            //on exécute la requête
+<span class="nc" id="L89">            ResultSet rs = stmt.executeQuery();</span>
+
+<span class="nc bnc" id="L91" title="All 2 branches missed.">            while (rs.next()) {</span>
+
+                //on créé une entity Revenue avec chaque ligne du résultat de la requête SQL
+<span class="nc" id="L94">                String nom_region = rs.getString(&quot;nom_region&quot;);</span>
+<span class="nc" id="L95">                int nbForm = rs.getInt(&quot;nbFormation&quot;);</span>
+<span class="nc" id="L96">                FormByStateEntity new_section = new FormByStateEntity(nom_region, nbForm);</span>
+               //on l'ajoute à la liste de résultats
+<span class="nc" id="L98">                result.add(new_section);</span>
+<span class="nc" id="L99">            }</span>
+<span class="nc bnc" id="L100" title="All 16 branches missed.">        }</span>
+
+<span class="nc" id="L102">        return result;</span>
+        //Visualiser les chiffres d'affaire par zone géographique, en choisissant la période 
+       //(date de début / date de fin) sur laquelle doit porter la statistique.
+
+        //Visualiser les chiffres d'affaire par client, en choisissant la période 
+        //(date de début / date de fin) sur laquelle doit porter la statistique.
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.7.201606060606</span></div></body></html>
