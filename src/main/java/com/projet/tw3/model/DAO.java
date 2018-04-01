@@ -79,7 +79,7 @@ public void addEtab(String _nom_etab,String _sigle_etab,String _code_postal_etab
      */
     public List<FormByStateEntity> nbFormByState() throws SQLException, ParseException {
 
-        List<FormByStateEntity> result = new LinkedList<>();
+        List<FormByStateEntity> result = new ArrayList();
 
         String sql = "SELECT region.nom_region,COUNT(formation.intitule_form) as nbFormation FROM  etablissement, formation, region WHERE etablissement.fk_id_region_etab=region.id_region AND formation.fk_id_etablissement_form=etablissement.id_etablissement GROUP BY region.nom_region";
                 try (Connection connection = myDataSource.getConnection();

@@ -5,9 +5,7 @@
     <head>
                       
 	<title>Page stats</title>
-        <meta charset="utf-8" />;
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-	
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
         <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script> 
         <script src="http://cdn.jsdelivr.net/webshim/1.12.4/extras/modernizr-custom.js"></script>
@@ -117,6 +115,10 @@
 				    context: '#all-content'
 				  })
 ;
+$(stat1).click(function() {
+        alert("Allowed Clicked");
+        launchTables();
+    });
 			});
 	</script>
        
@@ -157,15 +159,20 @@
 					
 					<div class="column">
 						<div class="ui segment">
-							<div style="display: inline-block" id="piechart_formByState"></div>
-						</div>
+                                                    		<div>
+  <button id="stat1" class="ui red basic button">Formation/Région</button>
+  <button class="ui blue basic button">Two</button>
+  <button class="ui green basic button">Three</button>
+</div>
+							</div>
 						<div class="ui segment">
-							
+					
 						</div>
 					</div>
 					<div class="column">
 						<div class="ui segment">
-							<div id="mapid"></div>
+							<div style="display: inline-block" id="piechart_formByState"></div>
+						
 						</div>
 					</div>
 				
