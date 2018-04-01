@@ -1,0 +1,59 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+  <link rel="stylesheet" href="stickyfoo.css">
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6/jquery.min.js"></script>
+  <script src="jquery.stickyfoo.js"></script>
+  <script type="text/javascript">
+    $(window).load(function() {
+        //TODO: Figure out why the first run of stickyfoos updateFooter() results in different geometry for the body than the second run triggered by $(window).scroll();
+        $('#footer').stickyfoo();
+        $(window).scroll();
+    });
+  </script>
+  <style type="text/css">
+    body {
+      color: black;
+      background: white;
+    }
+    #wrap, #footer {
+      padding: 1px 30px 30px 30px;
+    }
+    #wrap {
+      background: #eee;
+    }
+    #footer {
+      background: #ddd;
+    }
+    em {
+      font-style: normal;
+      background: hsl(60, 100%, 70%);
+    }
+  </style>
+</head>
+<body>
+  <div id="wrap">
+    <p><small>#wrap</small></p>
+    <h1>Stickyfoo: Semantic Sticky Footer Plugin for jQuery</h1>
+    <p>Here's the footer:</p>
+
+    <pre><code>&lt;footer id="site-footer"&gt;&lt;/footer&gt;</code></pre>
+
+    <p>Make it sticky:</p>
+
+    <pre><code>$('#footer').stickyfoo();</code></pre>
+
+    <p>When there's room at the bottom, the footers gets a class:</p>
+
+    <pre><code>&lt;footer class="site-footer <em>sticky</em>"&gt;&lt;/footer&gt;</code></pre>
+    
+  </div>
+  <div id="footer">
+    <p><small>#footer</small></p>
+    <h2>Feedback</h2>
+    <p>Tweet <a href="http://twitter.com/sakamies">@sakamies</a></p>
+  </div>
+</body>
+</html>

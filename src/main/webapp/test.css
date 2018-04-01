@@ -1,0 +1,53 @@
+.ui.center.aligned.header {
+background-color: #424242!important;
+}
+.ui.middle.aligned.center.aligned.grid {
+background-color: #EEEEEE!important;
+}
+.header-title {
+	color: white!important;
+	background-color: #FF6D37;
+	padding:5vh;
+}
+#mapid { height: 90vh; }
+#sub-header {
+	background-color: #FF6D37!important;
+}
+
+h4 {
+	color: #FF6D37!important;
+}
+h5 {
+	color:white;
+}
+body {
+
+	
+}
+#page {
+	margin-top:10vh;
+}
+
+#page-ancien {
+	margin-top: 10vh;
+	margin-bottom: 10vh;
+}
+
+.chart div {
+  font: 10px sans-serif;
+  background-color: steelblue;
+  text-align: right;
+  padding: 3px;
+  margin: 1px;
+  color: white;
+}
+
+#footer {
+	background-color: #424242!important;
+	color:white;
+	
+}
+
+#avis-row {
+	margin:20px;
+}
