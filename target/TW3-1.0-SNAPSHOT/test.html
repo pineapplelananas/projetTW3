@@ -18,53 +18,13 @@
 
 
         <link rel="stylesheet" type="text/css" href="semantic/semantic.min.css">
-        <script
-            src="https://code.jquery.com/jquery-3.1.1.min.js"
-            integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
-        crossorigin="anonymous"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
         <script src="semantic/semantic.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
 
         <script>
 
-               $(document).ready(function () {
-                   $('select.dropdown').dropdown();
-                   var mymap = null;
-
-                   function initMap() {
-                       mymap = L.map('mapid').setView([43.933333, 2.15], 7);
-                       L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
-                           attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
-                           maxZoom: 18,
-                           id: 'mapbox.streets-basic',
-                           accessToken: 'pk.eyJ1IjoieGFtZXl6IiwiYSI6ImNqZXRvbGI1MjViMjQyeHBrcHpzN2tveDcifQ.RBhDNw85zkNF3J36ITLyEQ'
-                       }).addTo(mymap);
-                   }
-                   function initMarkers() {
-                    for (var i=0; i<testMarkers.length;i++) {
-                        var marker = L.marker([testMarkers[i].lat, testMarkers[i].long], {markerId: testMarkers[i].name}).addTo(mymap);
-                        marker.on('click', function(e) {
-                            console.log("clicked on "+this.options.markerId);
-                        });
-                    }
-                   }
-                   var testMarkers = [ 
-                       {"lat" : "43.56099359999999", "long" : "1.463073500000064", "name" : "Toulouse"},
-                       {"lat" : "43.9194985", "long" : "2.1388672000000497", "name": "Albi"}
-                   ];
-                   
-                   initMap();
-                   initMarkers();
-
-                   
-                   
-                   
-                   $('.ui.sticky')
-                           .sticky({
-                               context: '#all-content'
-                           })
-                           ;
-               });
         </script>
         <title>Recherche de Masters - Université Jean-François Champollion</title>
 
@@ -102,19 +62,21 @@
                         En ayant sélectionné un Master, vous pourrez obtenir de multiples informations, notamment les anciens étudiants de Champollion qui l'ont intégré.</h5>	
                 </div>
             </div>
-            <div class="ui stackable two column grid">
-
-                <div class="column">
-                    <div class="ui segment">
+            <div class="ui segment">
+                <div class="ui inverted dimmer">
+                    <div class="ui text loader">Chargement des données</div>
+                </div>
+                <div class="ui stackable two column grid">
+                    <div class="column">
                         <div class="ui form">
                             <h4 class="ui dividing header">Localisation du Master</h4>
                             <div class="two fields">
                                 <div class="field">
                                     <label>Région</label>
-                                    <select class="ui fluid search dropdown" multiple="">
+                                    <select id="villeSelect" class="ui fluid search dropdown" multiple="">
                                         <option value="">Sélectionnez une région</option>
-                                        <option ng-repeat="region in regions" value="{{region.id}}">{{region.name}}</option>
-                
+                                        <option ng-cloak ng-repeat="region in regions" value="{{region.id}}">{{region.name}}</option>
+
 
                                     </select>
                                 </div>
@@ -122,7 +84,7 @@
                                     <label>Ville</label>
                                     <select class="ui fluid search dropdown" multiple="">
                                         <option value="">Sélectionnez une Ville</option>
-                                        <option ng-repeat="ville in villes" value="{{ville.name}}">{{ville.name}}</option>
+                                        <option ng-cloak ng-repeat="ville in villes" value="{{ville.name}}">{{ville.name}}</option>
                                     </select>
                                 </div>
                             </div>
@@ -131,7 +93,7 @@
                                 <label>Nom de l'établissement</label>
                                 <select class="ui fluid search dropdown" multiple="">
                                     <option value="">Sélectionnez un établissement</option>
-                                    <option ng-repeat="etablissement in etablissements" value="{{etablissement.id}}">{{etablissement.name}}</option>
+                                    <option ng-cloak ng-repeat="etablissement in etablissements" value="{{etablissement.id}}">{{etablissement.name}}</option>
 
                                 </select>
                             </div>
@@ -139,7 +101,7 @@
                                 <label>Intitulé de la formation</label>
                                 <select class="ui fluid search dropdown" multiple="">
                                     <option value="">Sélectionnez un intitulé</option>
-                                    <option ng-repeat="formation in formations" value="{{formation.id}}">{{formation.name}}</option>
+                                    <option ng-cloak ng-repeat="formation in formations" value="{{formation.id}}">{{formation.name}}</option>
 
                                 </select>
                             </div>
@@ -185,18 +147,19 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="ui segment">
+                        <div class="ui divider"></div>
+
                         0 resultats
+
                     </div>
-                </div>
-                <div class="column">
-                    <div class="ui segment">
+                    <div class="column">
+
                         <div id="mapid"></div>
+
                     </div>
+
+
                 </div>
-
-
             </div>
             <div id="footer" class="ui stackable three column grid">
                 <div class="ui middle aligned center aligned column">
@@ -213,28 +176,121 @@
             </div>
         </div>
         <script>
+                    //datas
+                    $(".dimmer").css("background-color", "rgba(0,0,0,0.5)");
+
+                    var exampleVilles = [];
+                    var exampleRegions = [];
+                    var exampleEtablissements = [];
+                    var exampleFormations = [];
+                    $('.segment').dimmer('show');
+                    $.ajax({
+                        url: "http://licinfo.univ-jfc.fr:8080/twmprojets/etablissements",
+                        async: false,
+                        success: function (result) {
+                            for (var i = 0; i < result.data.length; i++) {
+                                var item = result.data[i].ville_etab;
+                                exampleVilles.push({"name": item});
+                            }
+
+                        }
+                    });
+
+                    $.ajax({
+                        url: "http://licinfo.univ-jfc.fr:8080/twmprojets/regions",
+                        async: false,
+                        success: function (result) {
+                            for (var i = 0; i < result.data.length; i++) {
+                                var item = result.data[i];
+                                exampleRegions.push({"id": item.id_region, "name": item.nom_region});
+                            }
+                        }
+                    });
+
+                    $.ajax({
+                        url: "http://licinfo.univ-jfc.fr:8080/twmprojets/etablissements",
+                        async: false,
+                        success: function (result) {
+                            for (var i = 0; i < result.data.length; i++) {
+                                var item = result.data[i];
+                                exampleEtablissements.push({"id": item.id_etablissement, "name": item.nom_etab});
+                            }
+                        }
+                    });
+
+                    $.ajax({
+                        url: "http://licinfo.univ-jfc.fr:8080/twmprojets/formations",
+                        async: false,
+                        success: function (result) {
+                            for (var i = 0; i < result.data.length; i++) {
+                                var item = result.data[i];
+                                exampleFormations.push({"id": item.id_formation, "name": item.intitule_form});
+                            }
+                        }
+                    });
+                    //angularjs
+
                     var app = angular.module("App", []);
                     app.controller("Ctrl", function ($scope) {
-                        $scope.regions = [
-                            {id: "ETR", name:"Etranger"},
-                            {id: "OCC", name:"Occitanie"}
+                        $scope.regions = exampleRegions;
+
+                        $scope.villes = exampleVilles;
+
+                        $scope.etablissements = exampleEtablissements;
+
+                        $scope.formations = exampleFormations;
+                    });
+
+                    //on-ready, map
+                    $(document).ready(function () {
+                        $('select.dropdown').dropdown();
+
+
+                        var mymap = null;
+
+                        function initMap() {
+                            mymap = L.map('mapid').setView([43.933333, 2.15], 7);
+                            L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
+                                attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
+                                maxZoom: 18,
+                                id: 'mapbox.streets-basic',
+                                accessToken: 'pk.eyJ1IjoieGFtZXl6IiwiYSI6ImNqZXRvbGI1MjViMjQyeHBrcHpzN2tveDcifQ.RBhDNw85zkNF3J36ITLyEQ'
+                            }).addTo(mymap);
+                        }
+
+
+                        function initMarkers() {
+                            for (var i = 0; i < exampleVilles.length; i++) {
+                                $.ajax({
+                                    url: "https://geo.api.gouv.fr/communes?nom=" + exampleVilles[i].name + "&fields=centre&format=json&geometry=centre",
+                                    async: false,
+                                    success: function (result) {
+                                        var marker = L.marker([result[0].centre.coordinates[1], result[0].centre.coordinates[0]], {markerId: result[0].nom}).addTo(mymap);
+                                        marker.on('click', function (e) {
+                                            $('.ui.fluid.search.dropdown').dropdown('set selected', [this.options.markerId]);
+                                        });
+                                    }
+                                });
+
+                            }
+                        }
+                        var testMarkers = [
+                            {"lat": "43.56099359999999", "long": "1.463073500000064", "name": "Toulouse"},
+                            {"lat": "43.9194985", "long": "2.1388672000000497", "name": "Albi"}
                         ];
-                        
-                        $scope.villes = [
-                            {name:"Paris"},
-                            {name:"Albi"},
-                            {name:"Toulouse"}
-                        ];
-                        
-                        $scope.etablissements = [
-                            {id : 6, name: "Université Claude Bernard Lyon 1"  },
-                            {id : 7, name : "Pole Universitaire de Vichy"}
-                        ];
-                        
-                        $scope.formations = [
-                            {id: 8, name: "Intelligence Artificielle"},
-                            {id: 2, name: "Stratégie Internet et Pilotage de Projets en Entreprise"}
-                        ];
+
+                        initMap();
+                        initMarkers();
+
+
+
+
+                        $('.ui.sticky')
+                                .sticky({
+                                    context: '#all-content'
+                                })
+                                ;
+                        $('.segment').dimmer('hide');
                     });
         </script>
     </body>
