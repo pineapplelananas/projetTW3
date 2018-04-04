@@ -11,11 +11,11 @@ package com.projet.tw3.model;
  */
 public class FormByStateEntity {
     private String nom_region;
-    private int nb_form;
+    private int nbFormation;
 
     public FormByStateEntity(String nom_region, int nb_form) {
         this.nom_region = nom_region;
-        this.nb_form = nb_form;
+        this.nbFormation = nb_form;
     }
     
 }

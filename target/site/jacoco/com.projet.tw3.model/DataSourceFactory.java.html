@@ -5,8 +5,8 @@
  */
 package com.projet.tw3.model;
 
-
 import javax.sql.DataSource;
+import org.apache.commons.dbcp2.BasicDataSource;
 
 <span class="nc" id="L11">public class DataSourceFactory {</span>
 
@@ -25,28 +25,22 @@ import javax.sql.DataSource;
     public static DataSource getDataSource() {
         DataSource result;
 
-<span class="nc bnc" id="L28" title="All 2 branches missed.">        switch (TYPE) {</span>
-            case server: // Derby mode serveur, doit être démarré indépendamment
-<span class="nc" id="L30">                org.apache.derby.jdbc.ClientDataSource ds = new org.apache.derby.jdbc.ClientDataSource();</span>
-<span class="nc" id="L31">                ds.setDatabaseName(&quot;sample&quot;);</span>
-<span class="nc" id="L32">                ds.setUser(&quot;root&quot;);</span>
-<span class="nc" id="L33">                ds.setPassword(&quot;root&quot;);</span>
-                // The host on which Network Server is running
-<span class="nc" id="L35">                ds.setServerName(&quot;localhost&quot;);</span>
-                // port on which Network Server is listening
-<span class="nc" id="L37">                ds.setPortNumber(3306);</span>
-<span class="nc" id="L38">                result = ds;</span>
-<span class="nc" id="L39">                break;</span>
-            default: // Derby mode embedded, démarré automatiquement avec l'application
-<span class="nc" id="L41">                org.apache.derby.jdbc.EmbeddedDataSource es = new org.apache.derby.jdbc.EmbeddedDataSource();</span>
-<span class="nc" id="L42">                es.setCreateDatabase(&quot;create&quot;);</span>
-<span class="nc" id="L43">                es.setDatabaseName(&quot;embedded_sample&quot;);</span>
-<span class="nc" id="L44">                result = es;</span>
-        }
+<span class="nc" id="L28">        BasicDataSource ds = new BasicDataSource();</span>
 
-<span class="nc" id="L47">        return result;</span>
+<span class="nc" id="L30">        ds.setDriverClassName(&quot;com.mysql.jdbc.Driver&quot;);</span>
+
+<span class="nc" id="L32">        ds.setUrl(&quot;jdbc:mysql://&lt;host&gt;:&lt;port&gt;/&lt;database&gt;&quot;);</span>
+
+        //Set database user
+<span class="nc" id="L35">        ds.setUsername(&quot;root&quot;);</span>
+
+        //Set database password
+<span class="nc" id="L38">        ds.setPassword(&quot;root&quot;);</span>
+
+<span class="nc" id="L40">        result = ds;</span>
+
+<span class="nc" id="L42">        return result;</span>
     }
 
 }
-
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.7.201606060606</span></div></body></html>

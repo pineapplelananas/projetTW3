@@ -58,7 +58,7 @@ import com.projet.tw3.model.DataSourceFactory;
 <span class="nc" id="L58">            response.sendRedirect(&quot;customerServlet&quot;);</span>
 
 <span class="nc" id="L60">        } catch (Exception ex) {</span>
-<span class="nc" id="L61">            Logger.getLogger(&quot;addOrderServlet&quot;).log(Level.SEVERE, &quot;Action en erreur&quot;, ex);</span>
+<span class="nc" id="L61">            Logger.getLogger(&quot;AddEtablissementServlet&quot;).log(Level.SEVERE, &quot;Action en erreur&quot;, ex);</span>
 <span class="nc" id="L62">            String customer_id = request.getParameter(&quot;customer_id&quot;);</span>
 <span class="nc" id="L63">            request.setAttribute(&quot;customer_id&quot;, customer_id);</span>
 <span class="nc" id="L64">            request.setAttribute(&quot;message&quot;, ex.getMessage());</span>

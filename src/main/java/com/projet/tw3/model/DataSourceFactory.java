@@ -5,8 +5,8 @@
  */
 package com.projet.tw3.model;
 
-
 import javax.sql.DataSource;
+import org.apache.commons.dbcp2.BasicDataSource;
 
 public class DataSourceFactory {
 
@@ -25,27 +25,21 @@ public class DataSourceFactory {
     public static DataSource getDataSource() {
         DataSource result;
 
-        switch (TYPE) {
-            case server: // Derby mode serveur, doit être démarré indépendamment
-                org.apache.derby.jdbc.ClientDataSource ds = new org.apache.derby.jdbc.ClientDataSource();
-                ds.setDatabaseName("sample");
-                ds.setUser("root");
-                ds.setPassword("root");
-                // The host on which Network Server is running
-                ds.setServerName("localhost");
-                // port on which Network Server is listening
-                ds.setPortNumber(3306);
-                result = ds;
-                break;
-            default: // Derby mode embedded, démarré automatiquement avec l'application
-                org.apache.derby.jdbc.EmbeddedDataSource es = new org.apache.derby.jdbc.EmbeddedDataSource();
-                es.setCreateDatabase("create");
-                es.setDatabaseName("embedded_sample");
-                result = es;
-        }
+        BasicDataSource ds = new BasicDataSource();
+
+        ds.setDriverClassName("com.mysql.jdbc.Driver");
+
+        ds.setUrl("jdbc:mysql://<host>:<port>/<database>");
+
+        //Set database user
+        ds.setUsername("root");
+
+        //Set database password
+        ds.setPassword("root");
+
+        result = ds;
 
         return result;
     }
 
 }
-

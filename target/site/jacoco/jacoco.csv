@@ -6,7 +6,6 @@ TW3,com.projet.tw3.model,EntrepriseEntity,107,0,0,0,43,0,18,0,18,0
 TW3,com.projet.tw3.model,CursusEntity,29,0,0,0,13,0,6,0,6,0
 TW3,com.projet.tw3.model,DataSourceFactory.DriverType,38,0,0,0,2,0,4,0,4,0
 TW3,com.projet.tw3.model,MoyenneEntity,29,0,0,0,13,0,6,0,6,0
-TW3,com.projet.tw3.model,DataSourceFactory.new Object() {...},12,0,0,0,1,0,1,0,1,0
 TW3,com.projet.tw3.model,AncienEtudEntity,83,0,0,0,35,0,18,0,18,0
 TW3,com.projet.tw3.model,DAO,274,0,36,0,39,0,21,0,3,0
 TW3,com.projet.tw3.model,AeffectueEntity,43,0,0,0,18,0,9,0,9,0
@@ -16,5 +15,5 @@ TW3,com.projet.tw3.model,FormationEntity,81,0,0,0,33,0,14,0,14,0
 TW3,com.projet.tw3.model,StatutEntity,29,0,0,0,13,0,6,0,6,0
 TW3,com.projet.tw3.model,PosteEntity,73,0,0,0,30,0,15,0,15,0
 TW3,com.projet.tw3.model,DAOException,4,0,0,0,2,0,1,0,1,0
-TW3,com.projet.tw3.model,DataSourceFactory,47,0,2,0,16,0,4,0,3,0
+TW3,com.projet.tw3.model,DataSourceFactory,26,0,0,0,9,0,3,0,3,0
 TW3,com.projet.tw3.model,RegionEntity,29,0,0,0,13,0,6,0,6,0

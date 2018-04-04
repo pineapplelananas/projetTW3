@@ -26,6 +26,7 @@ import javax.sql.DataSource;
  * @author floriandenise
  */
 public class DAO {
+
     private final DataSource myDataSource;
 
     /**
@@ -36,7 +37,11 @@ public class DAO {
     public DAO(DataSource dataSource) {
         this.myDataSource = dataSource;
     }
-public void addEtab(String _nom_etab,String _sigle_etab,String _code_postal_etab,String _ville_etab,String _pays_etab,int _fk_id_region) throws DAOException {
+
+    /*
+    
+     */
+    public void addEtab(String _nom_etab, String _sigle_etab, String _code_postal_etab, String _ville_etab, String _pays_etab, int _fk_id_region) throws DAOException {
         String sql = "INSERT INTO etablissement VALUES (?, ?, ?, ?, ?, ?)";
         try (Connection connection = myDataSource.getConnection(); // Ouvrir une connexion
                 PreparedStatement stmt = connection.prepareStatement(sql);) {
@@ -47,7 +52,6 @@ public void addEtab(String _nom_etab,String _sigle_etab,String _code_postal_etab
             String ville_etab = _ville_etab;
             String pays_etab = _pays_etab;
             int fk_id_region = _fk_id_region;
-
 
             stmt.setString(1, nom_etab);
             stmt.setString(2, sigle_etab);
@@ -67,13 +71,11 @@ public void addEtab(String _nom_etab,String _sigle_etab,String _code_postal_etab
         }
 
     }
- /*
-     * Permet de connaître le chiffre d'affaires par catégorie de produit
-     * réalisé entre deux certaines dates
+
+    /*
+     * Permet de connaître le nombre de formation par région
      *
-     * @param date_debut le début de la période étudiée
-     * @param date_fin la fin de la période étudiée
-     * @return une liste d'entités Revenue
+     * @return une liste d'entités formationByStateEntity
      * @throws SQLException
      * @throws ParseException
      */
@@ -81,8 +83,10 @@ public void addEtab(String _nom_etab,String _sigle_etab,String _code_postal_etab
 
         List<FormByStateEntity> result = new ArrayList();
 
-        String sql = "SELECT region.nom_region,COUNT(formation.intitule_form) as nbFormation FROM  etablissement, formation, region WHERE etablissement.fk_id_region_etab=region.id_region AND formation.fk_id_etablissement_form=etablissement.id_etablissement GROUP BY region.nom_region";
-                try (Connection connection = myDataSource.getConnection();
+        String sql = "SELECT region.nom_region,COUNT(formation.intitule_form) as nbFormation FROM  "
+                + "etablissement, formation, region WHERE etablissement.fk_id_region_etab=region.id_region "
+                + "AND formation.fk_id_etablissement_form=etablissement.id_etablissement GROUP BY region.nom_region";
+        try (Connection connection = myDataSource.getConnection();
                 PreparedStatement stmt = connection.prepareStatement(sql)) {
 
             //on exécute la requête
@@ -94,16 +98,12 @@ public void addEtab(String _nom_etab,String _sigle_etab,String _code_postal_etab
                 String nom_region = rs.getString("nom_region");
                 int nbForm = rs.getInt("nbFormation");
                 FormByStateEntity new_section = new FormByStateEntity(nom_region, nbForm);
-               //on l'ajoute à la liste de résultats
+                //on l'ajoute à la liste de résultats
                 result.add(new_section);
             }
         }
 
         return result;
-        //Visualiser les chiffres d'affaire par zone géographique, en choisissant la période 
-       //(date de début / date de fin) sur laquelle doit porter la statistique.
 
-        //Visualiser les chiffres d'affaire par client, en choisissant la période 
-        //(date de début / date de fin) sur laquelle doit porter la statistique.
     }
 }

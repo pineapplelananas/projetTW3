@@ -58,7 +58,7 @@ public class AddEtablissement extends HttpServlet {
             response.sendRedirect("customerServlet");
 
         } catch (Exception ex) {
-            Logger.getLogger("addOrderServlet").log(Level.SEVERE, "Action en erreur", ex);
+            Logger.getLogger("AddEtablissementServlet").log(Level.SEVERE, "Action en erreur", ex);
             String customer_id = request.getParameter("customer_id");
             request.setAttribute("customer_id", customer_id);
             request.setAttribute("message", ex.getMessage());
