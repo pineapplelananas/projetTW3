@@ -50,9 +50,9 @@
 
                 $.ajax({
                     async: false,
-                    url: "/FormationByStateServlet",
+                    url: "FormationByStateServlet",
                     dataType: "json",
-
+                    
                     error: showError,
                     success: function (result) {
                         drawChart(result, "formByState");

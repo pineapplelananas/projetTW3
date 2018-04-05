@@ -5,42 +5,34 @@
  */
 package com.projet.tw3.model;
 
-import javax.sql.DataSource;
-import org.apache.commons.dbcp2.BasicDataSource;
+import com.mysql.jdbc.jdbc2.optional.MysqlDataSource;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Properties;
 
-<span class="nc" id="L11">public class DataSourceFactory {</span>
+<span class="nc" id="L13">public class DataSourceFactory {</span>
+<span class="nc" id="L14"></span>
+    MysqlDataSource result;
 
-<span class="nc" id="L13">    public enum DriverType {</span>
-<span class="nc" id="L14">        embedded, server</span>
-    };
+    public MysqlDataSource getSQLDataSource() {
+<span class="nc" id="L18">        Properties props = new Properties();</span>
 
-    // Choic du type de driver : embedded ou serveur
-<span class="nc" id="L18">    private static final DriverType TYPE = DriverType.server;</span>
+<span class="nc" id="L20">        ClassLoader classloader = Thread.currentThread().getContextClassLoader();</span>
+<span class="nc" id="L21">        InputStream is = classloader.getResourceAsStream(&quot;properties.properties&quot;);</span>
 
-    /**
-     * Renvoie la source de données (server ou embbeded)
-     *
-     * @return la source de données
-     */
-    public static DataSource getDataSource() {
-        DataSource result;
+        try {
+<span class="nc" id="L24">            props.load(is);</span>
+<span class="nc" id="L25">            result = new MysqlDataSource();</span>
+<span class="nc" id="L26">            result.setURL(props.getProperty(&quot;MYSQL_DB_URL&quot;));</span>
+<span class="nc" id="L27">            result.setUser(props.getProperty(&quot;MYSQL_DB_USERNAME&quot;));</span>
+<span class="nc" id="L28">            result.setPassword(props.getProperty(&quot;MYSQL_DB_PASSWORD&quot;));</span>
 
-<span class="nc" id="L28">        BasicDataSource ds = new BasicDataSource();</span>
+<span class="nc" id="L30">        } catch (IOException e) {</span>
+<span class="nc" id="L31">            System.out.println(e.getMessage());</span>
+<span class="nc" id="L32">        }</span>
+<span class="nc" id="L33">        return result;</span>
 
-<span class="nc" id="L30">        ds.setDriverClassName(&quot;com.mysql.jdbc.Driver&quot;);</span>
-
-<span class="nc" id="L32">        ds.setUrl(&quot;jdbc:mysql://&lt;host&gt;:&lt;port&gt;/&lt;database&gt;&quot;);</span>
-
-        //Set database user
-<span class="nc" id="L35">        ds.setUsername(&quot;root&quot;);</span>
-
-        //Set database password
-<span class="nc" id="L38">        ds.setPassword(&quot;root&quot;);</span>
-
-<span class="nc" id="L40">        result = ds;</span>
-
-<span class="nc" id="L42">        return result;</span>
+    
     }
-
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.7.201606060606</span></div></body></html>

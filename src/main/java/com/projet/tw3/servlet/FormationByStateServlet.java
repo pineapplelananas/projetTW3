@@ -41,7 +41,7 @@ public class FormationByStateServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
         throws ServletException, IOException, ParseException, SQLException {
-        DAO dao = new DAO(DataSourceFactory.getDataSource());
+        DAO dao = new DAO(new DataSourceFactory().getSQLDataSource());
 
         List<FormByStateEntity> list = null;
        

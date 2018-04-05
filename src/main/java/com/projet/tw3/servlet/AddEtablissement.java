@@ -33,7 +33,7 @@ public class AddEtablissement extends HttpServlet {
             throws ServletException, IOException {
         try {
             //on importe le DAO
-            DAO dao = new DAO(DataSourceFactory.getDataSource());
+           DAO dao = new DAO(new DataSourceFactory().getSQLDataSource());
             
             //on récupère la session en cours si elle existe
             HttpSession session = request.getSession(false);

@@ -33,7 +33,7 @@ import com.projet.tw3.model.DataSourceFactory;
             throws ServletException, IOException {
         try {
             //on importe le DAO
-<span class="nc" id="L36">            DAO dao = new DAO(DataSourceFactory.getDataSource());</span>
+<span class="nc" id="L36">           DAO dao = new DAO(new DataSourceFactory().getSQLDataSource());</span>
             
             //on récupère la session en cours si elle existe
 <span class="nc" id="L39">            HttpSession session = request.getSession(false);</span>
