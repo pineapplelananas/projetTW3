@@ -23,9 +23,6 @@
         <script src="semantic/semantic.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
 
-        <script>
-
-        </script>
         <title>Recherche de Masters - Université Jean-François Champollion</title>
 
     </head>
@@ -46,7 +43,7 @@
             <div class="ui middle aligned center aligned grid">
 
                 <div class="six wide column">
-                    <img class="ui centered small rounded image" src="LOGO_CHAMPOLLION.png">
+                    <img class="ui centered small rounded image" src="img/LOGO_CHAMPOLLION.png">
                 </div>
                 <div class="ten wide column">
                     <h1>Recherche de Master</h1>
@@ -63,6 +60,9 @@
                 </div>
             </div>
             <div class="ui segment">
+                <div id="contenu" class="ui active dimmer">
+                    <div class="ui loader"></div>
+                </div>
                 <div class="ui stackable two column grid">
                     <div class="column">
                         <div class="ui form">
@@ -140,14 +140,20 @@
 
                                 </div>
                                 <div class="one wide field">
-                                    <button class="ui button" type="submit">Rechercher</button>
+                                    <button ng-click="buttonClick()" class="ui button" type="submit">Rechercher</button>
                                 </div>
                             </div>
                         </div>
                         <div class="ui divider"></div>
 
-                        0 resultats
 
+                        <div  class="ui segment">
+                            <div ng-cloak ng-repeat="etab in resultEtablissements"><h4 class="resultEtablissement"><a href="#">{{etab.nom_etab}}</a></h4>{{etab.nom_region}}
+                            </div>
+                            <div id="rechercher" class="ui active dimmer" style="display : none">
+                                <div class="ui loader"></div>
+                            </div>
+                        </div>
                     </div>
                     <div class="column">
 
@@ -173,73 +179,78 @@
             </div>
         </div>
         <script>
-                    //datas
-                    $(".dimmer").css("background-color", "rgba(0,0,0,0.5)");
-                    var exampleVilles = [];
-                    var exampleRegions = [];
-                    var exampleEtablissements = [];
-                    var exampleFormations = [];
-                    $('.segment').dimmer('show');
-                    $.ajax({
-                        url: "http://licinfo.univ-jfc.fr:8080/twmprojets/etablissements",
-                        async: false,
-                        success: function (result) {
-                            for (var i = 0; i < result.data.length; i++) {
-                                var item = result.data[i].ville_etab;
-                                exampleVilles.push({"name": item});
-                            }
-
-                        }
-                    });
-
-                    $.ajax({
-                        url: "http://licinfo.univ-jfc.fr:8080/twmprojets/regions",
-                        async: false,
-                        success: function (result) {
-                            for (var i = 0; i < result.data.length; i++) {
-                                var item = result.data[i];
-                                exampleRegions.push({"id": item.id_region, "name": item.nom_region});
-                            }
-                        }
-                    });
-
-                    $.ajax({
-                        url: "http://licinfo.univ-jfc.fr:8080/twmprojets/etablissements",
-                        async: false,
-                        success: function (result) {
-                            for (var i = 0; i < result.data.length; i++) {
-                                var item = result.data[i];
-                                exampleEtablissements.push({"id": item.id_etablissement, "name": item.nom_etab});
-                            }
-                        }
-                    });
-
-                    $.ajax({
-                        url: "http://licinfo.univ-jfc.fr:8080/twmprojets/formations",
-                        async: false,
-                        success: function (result) {
-                            for (var i = 0; i < result.data.length; i++) {
-                                var item = result.data[i];
-                                exampleFormations.push({"id": item.id_formation, "name": item.intitule_form});
-                            }
-                        }
-                    });
                     //angularjs
-
                     var app = angular.module("App", []);
-                    app.controller("Ctrl", function ($scope) {
-                        $scope.regions = exampleRegions;
+                    app.controller("Ctrl", function ($scope, $http) {
+                        //datas
+                        $(".dimmer").css("background-color", "rgba(0,0,0,0.5)");
+                        $scope.regions = [];
 
-                        $scope.villes = exampleVilles;
+                        $scope.villes = [];
 
-                        $scope.etablissements = exampleEtablissements;
+                        $scope.etablissements = [];
 
-                        $scope.formations = exampleFormations;
-                    });
+                        $scope.formations = [];
 
-                    //on-ready, map
-                    $(document).ready(function () {
-                        $('select.dropdown').dropdown();
+                        $scope.resultEtablissements = [];
+
+
+                        $('#contenu').show();
+
+                        $scope.buttonClick = function () {
+
+                            $('#rechercher').show();
+
+                            $http.get("http://licinfo.univ-jfc.fr:8080/twmprojets/etablissements")
+                                    .then(function (response) {
+                                        if (response.data.length === 0) {
+                                            $scope.resultEtablissements.push({nom_etab: "Aucun résultat, cliquez réinitialiser le formulaire"});
+                                        } else {
+                                            $scope.resultEtablissements = response.data.data;
+                                        }
+                                    });
+                            $('#rechercher').hide();
+                        };
+
+                        $http.get("http://licinfo.univ-jfc.fr:8080/twmprojets/etablissements")
+                                .then(function (response) {
+                                    
+                                    console.log(response);
+                                    for (var i = 0; i < response.data.data.length; i++) {
+                                        var item = response.data.data[i].ville_etab;
+                                        var dept = response.data.data[i].code_postal_etab.substring(0, 2);
+                                        $scope.villes.push({"name": item, "code_dept": dept});
+                                    }
+                                    initMarkers();
+
+
+                                });
+
+                        $http.get("http://licinfo.univ-jfc.fr:8080/twmprojets/regions")
+                                .then(function (response) {
+                                    for (var i = 0; i < response.data.data.length; i++) {
+                                        $scope.regions.push({"id": response.data.data[i].id_region, "name": response.data.data[i].nom_region});
+                                    }
+
+                                });
+
+                        $http.get("http://licinfo.univ-jfc.fr:8080/twmprojets/etablissements")
+                                .then(function (response) {
+                                    for (var i = 0; i < response.data.data.length; i++) {
+                                        $scope.etablissements.push({"id": response.data.data[i].id_etablissement, "name": response.data.data[i].nom_etab});
+                                    }
+                                });
+
+                        $http.get("http://licinfo.univ-jfc.fr:8080/twmprojets/formations")
+                                .then(function (response) {
+                                    for (var i = 0; i < response.data.data.length; i++) {
+                                        $scope.formations.push({"id": response.data.data[i].id_formation, "name": response.data.data[i].intitule_form});
+                                    }
+                                });
+
+
+
+
 
 
                         var mymap = null;
@@ -254,39 +265,41 @@
                             }).addTo(mymap);
                         }
 
-
+                        var requestAndCreateMarker = function (_name_ville, _code_postal) {
+                            return $http.get("https://geo.api.gouv.fr/communes?nom=" + _name_ville + "&codeDepartement=" + _code_postal + "&fields=centre&format=json&geometry=centre")
+                                    .then(function (response) {
+                                        for (var j = 0; j < response.data.length; j++) {
+                                            if (response.data[j].nom === _name_ville) {
+                                                var marker = L.marker([response.data[j].centre.coordinates[1], response.data[j].centre.coordinates[0]], {markerId: response.data[j].nom}).addTo(mymap);
+                                                marker.on('click', function (e) {
+                                                    $('.ui.fluid.search.dropdown').dropdown('set selected', [this.options.markerId]);
+                                                });
+                                            }
+                                        }
+                                    });
+                        };
                         function initMarkers() {
-                            for (var i = 0; i < exampleVilles.length; i++) {
-                                $.ajax({
-                                    url: "https://geo.api.gouv.fr/communes?nom=" + exampleVilles[i].name + "&fields=centre&format=json&geometry=centre",
-                                    async: false,
-                                    success: function (result) {
-                                        var marker = L.marker([result[0].centre.coordinates[1], result[0].centre.coordinates[0]], {markerId: result[0].nom}).addTo(mymap);
-                                        marker.on('click', function (e) {
-                                            $('.ui.fluid.search.dropdown').dropdown('set selected', [this.options.markerId]);
-                                        });
-                                    }
-                                });
+                            for (var i = 0; i < $scope.villes.length; i++) {
+                                requestAndCreateMarker($scope.villes[i].name, $scope.villes[i].code_dept);
 
                             }
                         }
-                        var testMarkers = [
-                            {"lat": "43.56099359999999", "long": "1.463073500000064", "name": "Toulouse"},
-                            {"lat": "43.9194985", "long": "2.1388672000000497", "name": "Albi"}
-                        ];
 
                         initMap();
-                        initMarkers();
 
 
+                        //on-ready, map
+                        angular.element(document).ready(function () {
+                            $('select.dropdown').dropdown();
+                            $('.ui.sticky')
+                                    .sticky({
+                                        context: '#all-content'
+                                    })
+                                    ;
+                            $('#contenu').hide();
+                        });
 
 
-                        $('.ui.sticky')
-                                .sticky({
-                                    context: '#all-content'
-                                })
-                                ;
-                        $('.segment').dimmer('hide');
                     });
         </script>
     </body>

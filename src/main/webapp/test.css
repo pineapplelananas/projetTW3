@@ -9,13 +9,17 @@ background-color: #EEEEEE!important;
 	background-color: #FF6D37;
 	padding:5vh;
 }
-#mapid { height: 90vh; }
+#mapid { min-height: 90vh}
 #sub-header {
 	background-color: #FF6D37!important;
 }
 
 h4 {
 	color: #FF6D37!important;
+}
+
+.resultEtablissement {
+    margin-top:15px !important;
 }
 h5 {
 	color:white;
@@ -50,4 +54,10 @@ body {
 
 #avis-row {
 	margin:20px;
+}
+
+@media (max-width: 749px) {
+    h5 {
+        margin:10px !important;
+    }
 }
