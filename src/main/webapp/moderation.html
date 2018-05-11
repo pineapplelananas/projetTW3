@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.1/dist/leaflet.css"
+              integrity="sha512-Rksm5RenBEKSKFjgI3a41vrjkw4EVPlJ3+OiI65vTjIdo9brlAacEuKOiQ5OFh7cOI1bkDwLqdLw3Zg0cRJAAQ=="
+              crossorigin=""/>
+        <link rel="stylesheet" href="test.css"/>
+        <!-- Make sure you put this AFTER Leaflet's CSS -->
+        <script src="https://unpkg.com/leaflet@1.3.1/dist/leaflet.js"
+                integrity="sha512-/Nsx9X4HebavoBvEBuyp3I7od5tA0UzAxs+j83KgC8PU0kgB4XiK4Lfe4y4cgBtaRJQEIFCW+oC506aPT2L1zw=="
+                crossorigin="">
+        </script>
+
+        <script src='https://api.mapbox.com/mapbox-gl-js/v0.44.1/mapbox-gl.js'></script>
+        <link href='https://api.mapbox.com/mapbox-gl-js/v0.44.1/mapbox-gl.css' rel='stylesheet' />
+
+
+        <link rel="stylesheet" type="text/css" href="semantic/semantic.min.css">
+        <script
+            src="https://code.jquery.com/jquery-3.1.1.min.js"
+            integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+        crossorigin="anonymous"></script>
+        <script src="semantic/semantic.min.js"></script>
+        <script src="https://d3js.org/d3.v5.min.js"></script>
+
+        <title>Ancien étudiant</title>
+
+    </head>
+
+    <body class="Site">
+        <main class="site-content">
+            <div class="ui center aligned header">
+                <button class="ui facebook button">
+                    <i class="facebook icon"></i>
+                    Facebook
+                </button>
+                <button class="ui linkedin button">
+                    <i class="linkedin icon"></i>
+                    LinkedIn
+                </button>
+                <button class="ui facebook button"><i class="graduation cap icon"></i>Univ. Champollion</button>
+            </div>
+            <div class="ui middle aligned center aligned grid">
+
+                <div class="six wide column">
+                    <a href="recherche.html"><img class="ui centered small rounded image" src="img/LOGO_CHAMPOLLION.png"></a>
+                </div>
+                <div class="ten wide column">
+
+                    <h1>Connexion à votre espace ancien étudiant</h1>
+
+                </div>
+
+            </div>
+
+
+            <div id="sub-header" class="ui middle aligned center aligned grid">
+                <div class="sixteen wide column">
+
+                </div>
+            </div>
+            <div id="page-ancien" class="ui 	container">
+
+                <table class="ui sortable celled table">
+  <thead>
+    <tr>
+      <th class="sorted ascending">Id</th>
+      <th class="">Nom</th>
+      <th class="">Prénom</th>
+      <th class="">Mail</th>
+      <th class="">Region</th>
+      <th class="">Etablissement</th>
+      
+    </tr>
+  </thead>
+  <tbody>
+    
+    
+    
+  <tr>
+      <td>Jamie</td>
+      <td class="positive">Approved</td>
+      <td class="warning">Requires call</td>
+    </tr><tr>
+      <td>Jill</td>
+      <td class="negative">Denied</td>
+      <td>None</td>
+    </tr><tr>
+      <td>John</td>
+      <td>No Action</td>
+      <td>None</td>
+    </tr></tbody>
+  <tfoot>
+    <tr><th>3 People</th>
+    <th>2 Approved</th>
+    <th></th>
+  </tr></tfoot>
+</table>
+            </div>
+        </main>
+        <div class="ui grid">
+            <div class="sixteen wide column">
+            </div>
+        </div>
+        <div id="footer" class="ui stackable three column grid">
+            <div class="ui middle aligned center aligned column">
+                <button class="ui inverted button"><a href="connect.html">Connexion administrateur</a></button>
+
+            </div>
+            <div class="ui middle aligned center aligned column">
+                <i class="copyright icon"></i>2018 - Pour toute question, s'adresser à l'Université Jean-François Champollion
+            </div>
+            <div class="ui middle aligned center aligned column">
+                Site réalisé par les étudiants de la Licence 3 Informatique
+
+            </div>
+        </div>
+        <script>
+        </script>
+    </body>
+</html> 
